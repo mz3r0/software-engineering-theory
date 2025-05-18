@@ -1,10 +1,14 @@
-# Contents
+# Welcome to SWE theory
 
-## Programming paradigms & types of languages
+A collection of documents containing a top-to-bottom and simple-to-advanced set of useful concepts, theories, and knowledge.
 
-A relatively top-to bottom beginner to advanced approach to paradigms and concepts like OOP, inheritance, diamond problem, etc.
+This repository is a constant WIP.
 
-Table of contents (level 1 and level 2 for OOP):
+## 1. Programming paradigms & types of languages
+
+Learn about OOP, inheritance, the diamond problem, etc.
+
+Contents:
 
 - Unstructured vs Structured
 - High level vs Low level
@@ -27,30 +31,28 @@ Table of contents (level 1 and level 2 for OOP):
   - Criticism (OOP)
 - Probabilistic Programming
 
-Where not necessary, I did not use my own words - that is, most of the time.
+Paraphrasing wasn't required most of the time. \
+Credit belongs to the original authors.
 
-It still counts as work in progress. I don't expect to make changes any time soon.
-
-Sources:
+Primary sources:
 
 - Wikipedia
 - Python docs
-- Linkedin official articles
-- Direct embedded links
-- Others
+- Linkedin articles
 
-Markdown quotes also denote extra info, aside from actual quotes. Initial draft was written in Obsidian. Now I've shared it on GitHub (for the 2nd time).
+## Additional notes
 
-Note that level 5 and 6 headings appear similar. Perhaps GitHub's stylistic render of Markdown needs adjustment as headings appear smaller than regular text.
+- GitHub's Markdown renderer may need adjustment Level 5 and 6 headings appear similar.
+- Markdown quotes are occasionally also used to denote bonus info, when the source isn't explicit.
+- This repo started as a single Obsidian note and has been shared on GitHub twice.
 
-Since this is a re-upload and I'm deleting the old repo, here's a snapshot of my contributions last year. A large number are a reflection of working on programming paradigms.
+Below is a snapshot of my contributions the year prior (2023-2024), most of which went to the first version of this repo and specifically the programming paradigms:
 
 ![Contributions snapshot](img/contributions-screenshot.png)
 
-
-
 ## Lorien
 
-Notes taken on Lorien using a drawing pad.
+Some notes could best be saved visually on Lorien using a drawing pad. \
+The DECO 03 was used. Lorien files can be downloaded and edited locally.
 
-Lorien features an [infinite canvas](https://github.com/mbrlabs/Lorien)
+A feature I particularly like is its [infinite canvas](https://github.com/mbrlabs/Lorien)
