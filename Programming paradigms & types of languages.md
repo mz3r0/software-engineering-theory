@@ -1,32 +1,52 @@
 # Programming paradigms & types of languages
 
-Programming paradigms are a way to classify programming languages based on their features. One programming language can be classified into multiple paradigms.
+Programming paradigms ways to classify programming languages based on their features. Some are concerned with the execution model of the language (side-effects being allowed, etc.), some are conncerned with the way code is organized into units along with the state being modified by the code, and some with the style of syntax and grammar.
 
-Some paradigms are concerned mainly with implications for the execution model of the language, such as allowing side effects, or whether the sequence of operations is defined by the execution model. Other paradigms are concerned mainly with the way that code is organized, such as grouping a code into units along with the state that is modified by the code. Yet others are concerned mainly with the style of syntax and grammar.
-
-According to the criticism section on Wikipedia, some programming language researchers criticize the notion of paradigms as a classification of programming languages, e.g. Harper, and Krishnamurthi. They argue that many programming languages, in reality, include features from several paradigms.
+It can be argued that many languages include features from several programming paradigms [[Wikipedia](https://en.wikipedia.org/wiki/Programming_paradigm#Criticism)]. From experience, that is indeed the case.
 
 **Degree of coupling and cohesion**
 
-In software engineering, coupling is the degree of interdependence between software modules; a measure of how closely connected two routines or modules are; the strength of the relationships between modules. Coupling is usually contrasted with cohesion. Low coupling often correlates with high cohesion, and vice versa. Low coupling is often thought to be a sign of a well-structured computer system and a good design, and when combined with high cohesion, supports the general goals of high readability and maintainability.
+Cohesion measures how closely the responsibilities within a single module (class, function, component) are related. High cohesion means a module does one thing and does it well — its internal elements work together toward a single, well-defined purpose. Low cohesion means a module is a grab bag of unrelated responsibilities, which makes it harder to maintain and reason about.
 
-The software quality metrics of coupling and cohesion were invented by Larry Constantine in the late 1960s as part of a structured design, based on characteristics of “good” programming practices that reduced maintenance and modification costs. Structured design, including cohesion and coupling, were published in the article Stevens, Myers & Constantine (1974) and the book Yourdon & Constantine (1979).
+High cohesion = separation of concerns = good.
+Low cohesion = mixed responsibilities = bad.
 
-> In a nutshell: Tight coupling = more interdependency, coordination and information flow while low coupling = higher organization and modularity.
+Coupling measures how much one module depends on another. Low coupling means modules know as little as possible about each other, interacting through well-defined interfaces. High coupling means modules are tightly interconnected, so a change in one can easily break another.
 
-Among the types of cohesion mentioned on Wikipedia, functional cohesion is considered superior. See also 'perfect cohesion' under [High Cohesion](https://en.wikipedia.org/wiki/Cohesion_(computer_science)#High_cohesion).
+Tight or high coupling = more interdependency = bad.
+Low coupling = higher organization & modularity = good.
+
+Cohesion pertains to the responsibilities of different modules while coupling pertains to the interdependecies of different modules.
+
+Low coupling is often thought to be a sign of a well-structured computer system and a good design, and when combined with high cohesion, supports the general goals of high readability and maintainability.
+
+The ideal is high cohesion and low coupling: modules that are internally focused and independent from each other. For example, a class that just handles database access is cohesive, while a class that handles database access, logging, and email notifications is not. If that database class can be swapped out without rewriting large parts of the system, coupling is low; if many modules directly rely on its internal details, coupling is high.
+
+Cohesion and coupling are software-quality metrics introduced during the late 1960s in the development of Structured Design (principally by Larry L. Constantine, with contributions from Stevens, Myers, etc.). The formal definitions and heuristics appeared in the 1974 paper “Structured Design” by Stevens, Myers & Constantine, followed by the book Structured Design: Fundamentals of a Discipline of Program and Systems Design by Yourdon & Constantine (mid-1970s, edition by 1979). The metrics are based on observations of “good” programming practices: highly cohesive modules (where parts are strongly related) and loosely coupled modules (with minimal dependencies between them) tend to reduce costs of maintenance and modification, improve reusability, and simplify understanding and debugging. Structured Design also introduced supporting artifacts such as structure charts, transform and transaction analysis, and heuristics for designing module hierarchies.
+
+There are multiple types of cohesion listed on [[Wikipedia](https://en.wikipedia.org/wiki/Cohesion_(computer_science)#Types_of_cohesion)]:
+- Coincidental cohesion (worst)
+- Logical cohesion
+- Temporal cohesion
+- Procedural cohesion
+- Communicational cohesion
+- Sequential cohesion
+- Functional cohesion (best)
+- Perfect cohesion (atomic)
 
 Peter Van Roy created a [map](https://upload.wikimedia.org/wikipedia/commons/f/f7/Programming_paradigms.svg) with various programming paradigms. Cited sources are: [Programming Paradigms for Dummies: What Every Programmer Should Know](https://www.info.ucl.ac.be/~pvr/VanRoyChapter.pdf) and the book [Concepts, Techniques, and Models of Computer Programming](https://books.google.gr/books?id=_bmyEnUnfTsC&redir_esc=y)
 
-> **TODO: Read the 2 above sources and update this document.**
+> **TODO #1: Explore the above 2 sources**
 
-As stated previously, just as software engineering (as a process) is defined by differing methodologies, so the programming languages (as models of computation) are defined by differing paradigms. 
+Just as software engineering (as a process) is defined by differing methodologies, so the programming languages (as models of computation) are defined by differing paradigms. 
 
-"Programming paradigms can also be compared with programming models, which allows invoking an execution model by using only an API. Programming models can also be classified into paradigms based on features of the execution model."
+**Programming paradigm vs programming model & parallel computing details**
 
-> **TODO: Learn what exactly programming models are and how they relate to paradigms.** Context: Using APIs, parallel computing and the below paragraph. Not much is listed on the [Wikipedia article](https://en.wikipedia.org/wiki/Programming_model)
+A programming paradigm is a fundamental concept or philosophy for how to approach and structure programming, such as imperative, declarative, object-oriented, or functional programming, offering a style of problem-solving. A programming model, conversely, is a more specific, architecture-dependent abstraction that defines the concrete details of **how** a system operates and how programmers interact with it, often by providing an API or execution model, especially in parallel or distributed systems where exposing hardware-level details is critical to achieve high performance.
 
-For parallel computing, using a programming model instead of a language is common. The reason is that details of the parallel hardware leak into the abstractions used to program the hardware. This causes the programmer to have to map patterns in the algorithm onto patterns in the execution model (which have been inserted due to leakage of hardware into the abstraction). **As a consequence, no one parallel programming language maps well to all computation problems**. Thus, it is more convenient to use a base sequential language and insert API calls to parallel execution models via a programming model. Such parallel programming models can be classified according to abstractions that reflect the hardware, such as [shared memory](https://en.wikipedia.org/wiki/Shared_memory "Shared memory"), [distributed memory](https://en.wikipedia.org/wiki/Distributed_memory "Distributed memory") with [message passing](https://en.wikipedia.org/wiki/Message_passing "Message passing"), notions of _place_ visible in the code, and so forth. These can be considered flavors of programming paradigm that apply to only parallel languages and programming models.
+The invocation of an outside execution model is the defining characteristic of a programming model, in contrast to a programming language. For example, the behavior of some API calls cannot be understood in terms of the programming language itself.
+
+For parallel computing, details of the parallel hardware leak into the abstractions used to program the hardware. This forces the programmer to create a mapping between patterns in the algorithm and patterns in the executio model. As a consequence, no one parallel programming language maps well to all computation problems, and it's impractical to make a new language for each execution model via an API. "Most of the programming effort is done via parallel programming models rather than parallel languages".
 
 ---
 
