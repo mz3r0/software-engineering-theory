@@ -1,5 +1,7 @@
 # Programming paradigms & types of languages
 
+_This document focuses more on theoretical and historical notes rather than modern practical examples_.
+
 Programming paradigms ways to classify programming languages based on their features. Some are concerned with the execution model of the language (side-effects being allowed, etc.), some are conncerned with the way code is organized into units along with the state being modified by the code, and some with the style of syntax and grammar.
 
 It can be argued that many languages include features from several programming paradigms [[Wikipedia](https://en.wikipedia.org/wiki/Programming_paradigm#Criticism)]. From experience, that is indeed the case.
@@ -36,7 +38,7 @@ There are multiple types of cohesion listed on [[Wikipedia](https://en.wikipedia
 
 Peter Van Roy created a [map](https://upload.wikimedia.org/wikipedia/commons/f/f7/Programming_paradigms.svg) with various programming paradigms. Cited sources are: [Programming Paradigms for Dummies: What Every Programmer Should Know](https://www.info.ucl.ac.be/~pvr/VanRoyChapter.pdf) and the book [Concepts, Techniques, and Models of Computer Programming](https://books.google.gr/books?id=_bmyEnUnfTsC&redir_esc=y)
 
-> **TODO #1: Explore the above 2 sources**
+> The first is quite dense and intersting. The second I haven't explored yet.
 
 Just as software engineering (as a process) is defined by differing methodologies, so the programming languages (as models of computation) are defined by differing paradigms. 
 
@@ -52,9 +54,9 @@ For parallel computing, details of the parallel hardware leak into the abstract
 
 ## Unstructured vs Structured
 
-**Non-structured programming** is the historically earliest programming paradigm capable of creating Turing-complete algorithms (citation needed). It is often contrasted with the structured programming paradigm, in particular with the use of **goto statements** or equivalent. The distinction was particularly stressed by the publication of the influential "Go To Statement Considered Harmful" open letter in 1968 by Dutch computer scientist Edsger W. Dijkstra, who coined the term "structured programming".
+**Non-structured programming** (also called unstructured programming) refers to programming before the structured programming paradigm was widely adopted, and it is capable of expressing Turing-complete algorithms. It is often contrasted with structured programming, particularly because non-structured programming frequently relies on unconditional jumps (e.g. **goto statements**) or equivalent control-flow mechanisms rather than higher-level constructs like loops, conditionals, and block structures. The distinction between non-structured and structured programming was made prominent by Edsger W. Dijkstra’s open letter “Go To Statement Considered Harmful”, published in Communications of the ACM in March 1968. In that letter, Dijkstra criticized the overuse of goto and advocated restricting control flow to better-understood structures. He also is credited with coining the term “structured programming.”
 
-There are both high- and low-level programming languages that use non-structured programming. Some include JOSS, FOCAL, TELCOMP, assembly languages, MS-DOS batch files, and early versions of BASIC, Fortran, COBOL, and MUMPS.
+There are both high- and low-level programming languages that use non-structured programming. Some include JOSS, FOCAL, TELCOMP, assembly languages, MS-DOS batch files, and early versions of BASIC, Fortran, COBOL, and MUMPS. Source: Wikipedia
 
 **Structured programming** (aka modular programming) is a programming paradigm aimed at improving the clarity, quality and development time of a computer program by making extensive use of the structured control flow constructs of selection (if/then/else) and repetition (while and for), block structures, and subroutines. Code becomes more efficient and easy to understand. It is possible to do structured programming in any programming language.
 
@@ -66,11 +68,13 @@ The most common problem in early exit is that cleanup or final statements are no
 
 Kent Beck, Martin Fowler and co-authors have argued in their refactoring books that nested conditionals may be harder to understand than a certain type of flatter structure using multiple exits predicated by guard clauses. **Their 2009 book flatly states that "one exit point is really not a useful rule. Clarity is the key principle: If the method is clearer with one exit point, use one exit point; otherwise don’t"**.
 
-In his 2004 textbook, David Watt writes that "single-entry multi-exit control flows are often desirable". Using Tennent's framework notion of sequencer, Watt uniformly describes the control flow constructs found in contemporary programming languages and attempts to explain why certain types of sequencers are preferable to others in the context of multi-exit control flows. ... Watt also examines how exception sequencers differ from escape and jump sequencers; this is explained in the next section of [this Wikipedia article](https://en.wikipedia.org/wiki/Structured_programming#CITEREFWattFindlay2004).
+In his 2004 textbook, David Watt writes that "single-entry multi-exit control flows are often desirable". Using Tennent's framework notion of sequencer, Watt uniformly describes the control flow constructs found in contemporary programming languages and attempts to explain why certain types of sequencers are preferable to others in the context of multi-exit control flows. ... Read more in his [book](https://en.wikipedia.org/wiki/Structured_programming#CITEREFWattFindlay2004).
 
 ### Exception handling
 
-Based on the coding error from the Ariane 501 disaster, software developer Jim Bonang argues that any exceptions thrown from a function violate the single-exit paradigm, and proposes that all inter-procedural exceptions should be forbidden. Bonang proposes that all single-exit conforming C++ should be written along the lines of:
+Based on the coding error from the Ariane 501 disaster, software developer Jim Bonang argues that any exceptions thrown from a function violate the single-exit paradigm, and proposes that all inter-procedural exceptions should be forbidden.
+
+Bonang proposes that all single-exit conforming C++ should be written along the lines of:
 
 ```C
 bool MyCheck1() throw() {
@@ -91,25 +95,48 @@ bool MyCheck1() throw() {
 
 Peter Ritchie also notes that, in principle, even a single throw right before the return in a function constitutes a violation of the single-exit principle, but argues that Dijkstra's rules were written in a time before exception handling became a paradigm in programming languages, so he proposes to allow any number of throw points in addition to a single return point. He notes that solutions that wrap exceptions for the sake of creating a single-exit have higher nesting depth and thus are more difficult to comprehend, and even accuses those who propose to apply such solutions to programming languages that support exceptions of engaging in cargo cult thinking.
 
-David Watt also analyzes exception handling in the framework of sequencers (introduced in the aforementioned article). Watt notes that an abnormal situation (generally exemplified with arithmetic overflows or input/output failures like file not found) is a kind of error that "is detected in some low-level program unit, but (for which) a handler is located in a high-level program unit". For example, a program might contain several calls to read files, but the action to perform when a file is not found depends on the meaning / purpose of the file in question to the program and thus a handling routine for this abnormal situation cannot be located in low-level system code. Watts further notes that introducing status flag testing in the caller, as single-exit structured programming or even (multi-exit) return sequencers would entail, results in a situation where "the application code tends to get cluttered by tests of status flags" and that "the programmer might forgetfully or lazily omit to test a status flag. In fact, abnormal situations represented by status flags are by default ignored!" He notes that in contrast to status flags testing, exceptions have the opposite default behavior, causing the program to terminate unless the programmer explicitly deals with the exception in some way, possibly by adding code to willfully ignore it. Based on these arguments, Watt concludes that jump sequencers or escape sequencers are not as suitable as a dedicated exception sequencer with the semantics discussed above.
+David Watt also analyzes exception handling in the framework of sequencers (introduced earlier). Watt notes that an abnormal situation is a kind of error that "is detected in some low-level program unit, but (for which) a handler is located in a high-level program unit". For example, a program might contain several calls to read files, but the action to perform when a file is not found depends on the meaning / purpose of the file in question to the program and thus a handling routine for this abnormal situation cannot be located in low-level system code. Watts further notes that introducing status flag testing in the caller, as single-exit structured programming or even (multi-exit) return sequencers would entail, results in a situation where "the application code tends to get cluttered by tests of status flags" and that "the programmer might forgetfully or lazily omit to test a status flag. In fact, abnormal situations represented by status flags are by default ignored!" He notes that in contrast to status flags testing, exceptions have the opposite default behavior, causing the program to terminate unless the programmer explicitly deals with the exception in some way, possibly by adding code to willfully ignore it.
+
+Citing multiple prior studies by others (1999–2004) and their own results, Westley Weimer and George Necula wrote that a significant problem with exceptions is that they "create hidden control-flow paths that are difficult for programmers to reason about". [Citation](https://en.wikipedia.org/wiki/Structured_programming#cite_note-21)
 
 In addition, the necessity to limit code to single-exit points appears in some contemporary programming environments focused on parallel computing, such as OpenMP. The various parallel constructs from OpenMP, like parallel do, do not allow early exits from inside to the outside of the parallel construct; this restriction includes all manner of exits, from break to C++ exceptions, but all of these are permitted inside the parallel construct if the jump target is also inside it.
 
+**The modern perspective**
+
+The structured programming "single exit" ideal (one return per function) is more a guideline or purist position than a requirement in practice. Exceptions indeed complicate control flow reasoning, by introducing hidden paths. The smaller the gap the better, between the place where an exception is thrown and where it is caught. Resource cleanup / safety concerns are real.
+
+In many real-world codebases however, multiple exits are accepted or even preferred when they increase clarity. For example, early return (“guard clauses”) are widely used to check for preconditions or bail out early, making the “main path” less indented and generally easier to follow. Using exceptions for “exceptional”, non-routine flows that affect many layers (e.g. error propagation) is considered acceptable.
+
+Trade-offs and weak conesus exist. Aside from the purisr vs pragmatic positions, whether to use exceptions or to return error codes / status indicators is debated. Exceptions tend to make error handling less cluttered in the call sites (you don’t have to check every return value) but at the cost of possible surprises and harder reasoning about error flow. Some argue for stricter exception hierarchies and explicit error types. Empirical studies show code with many exception paths is harder to analyze.
+
+Language support matters: Whether multiple exits and exceptions are “safe” depends a lot on the language constructs: whether cleanup (finally blocks, destructors) is automatic, whether exceptions are checked/unchecked, whether performance penalty is acceptable, whether tools (static analyzers, type systems) help track exception flows. In a language without good exception support, or without RAII/finally, the risks are higher. This moderates how much people push for or against multiple exits/exceptions in that language.
+
+Formal verification vs production code: In contexts where formal verification is important (critical systems, safety, etc.), there is stronger pressure to limit or eliminate constructs that complicate verification: multiple exit points, many unchecked exception paths, etc. But in many production systems (web apps, business software, etc.), the priority is maintainability, understandability, speed of development, so more pragmatic choices are made.
+
+Some studies show that adding exception paths increases complexity in call graphs, making reasoning and static analysis harder. [[Source a 2019 onwards](https://plg.uwaterloo.ca/~migod/papers/2019/scam19.pdf)]. Others show that misuse of exception handling (catching too broadly, ignoring exceptions, mixing error types) leads to bugs and maintenance issues. [[Source b 2013](https://jserd.springeropen.com/articles/10.1186/2195-1721-1-3?utm_source=chatgpt.com)]. Also see [[Source c](https://www.scielo.br/j/jbcos/a/sL6DtGPgr4Sc6XJrh8kxsnd/?format=html&lang=en)].
+
+Based on the above, some best practices regarding exceptions & entry points:
+1. Use exceptions for truly exceptional situations, i.e. avoid them if normal control flow can do the same task.
+2. When using exceptions, ensure proper cleanup/finalization in finally blocks, destructors, RAII, or similar, i.e. resources are not leaked even when early exit or exception occurs.
+3. Favor early returns / guard clauses in functions to simplify the main logic, reduce indentation and complexity, provided that the number of exit points remains manageable and the exits are meaningful (error or degenerate cases).
+4. Document / declare the exceptional (error) exit paths, especially in APIs / libraries, so callers can know what exceptions might propagate and under what conditions.
+5. Limit the cognitive and verification burden: avoid having too many exit points, especially in deeply nested or complex functions. If a function has many early exits, maybe it should be refactored into smaller functions (and increase cohesion).
+6. Rely on language features that aid control flow clarity: structured exception handling, finally/finalization, try/catch blocks located close to where errors are handled or where context is available.
+7. Use static analysis, code reviews, test coverage to check that exception/error paths are exercised and that code behaves correctly under those paths.
+
 ### Multiple entry
 
-More rarely, subprograms allow multiple entry. This is most commonly only re-entry into a coroutine (or generator / semi-coroutine), where a subprogram yields control (and possibly a value), but can then be resumed where it left off (Python does this using `yield`). There are a number of common uses of such programming, notably for streams (particularly input/output), state machines, and concurrency. From a code execution point of view, yielding from a coroutine is closer to structured programming than returning from a subroutine, as the subprogram has not actually terminated, and will continue when called again – it is not an early exit. However, coroutines mean that multiple subprograms have execution state – rather than a single call stack of subroutines – and thus introduce a different form of complexity.
+More rarely, subprograms allow multiple entry. This is most commonly only re-entry into a coroutine (or generator / semi-coroutine), where a subprogram yields control (and possibly a value), but can then be resumed where it left off (Python does this using `yield`). There are a number of common uses of such programming, notably for streams (particularly input/output), state machines, and concurrency. From a code execution point of view, yielding from a coroutine is closer to structured programming than returning from a subroutine, because it's not an early exit (yielding maintains a single, linear control path; just paused). However, coroutines imply managing execution state rather than a single call stack, which introduces a different form of complexity.
 
-From the [Multiple entry](https://en.wikipedia.org/wiki/Structured_programming#Multiple_entry) section, "It is very rare for subprograms to allow entry to an arbitrary position in the subprogram, as in this case the program state (such as variable values) is uninitialized or ambiguous, and this is very similar to a goto".
+Notably, structured programming and single-entry functions are preferred: they guarantee that every function starts from a well-defined point with a well-defined state. Arbitrary entry points would break that guarantee, a sitation described (on Wikipedia) as being "very similar to a goto".
 
-> **TODO: Find out examples of multiple entry code.** The words "very rare" imply the existence of such code, which I'm curious about.
+> There should be little to worry about, assuming they're used wisely, and provided they're supported by the language (like Python).
 
 ---
 
 ## High level vs Low level
 
-A **high-level programming language** is a language that has a relatively high level of abstraction.
-
-These languages are programmer-friendly and focus on usability over optimal program efficiency. They deal with variables, arrays, objects, complex arithmetic or Boolean expressions, subroutines, functions, loops, threads, locks, and other abstract computer science concepts. High-level languages are easier to understand and maintain, but they may be less memory-efficient compared to low-level languages.
+A **high-level programming language** is a language that has a relatively high level of abstraction. These languages are programmer-friendly and focus on usability over optimal program efficiency. They deal with variables, arrays, objects, complex arithmetic or Boolean expressions, subroutines, functions, loops, threads, locks, and other abstract computer science concepts. High-level languages are easier to understand and maintain, but they may be less memory-efficient compared to low-level languages.
 
 Examples of high-level languages include Java, Python, C#, and even C and C++. The latter two provide more freedom and control over memory, making them more low-level but not low enough to be considered a low-level programming language.
 
