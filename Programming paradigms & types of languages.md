@@ -140,11 +140,13 @@ A **high-level programming language** is a language that has a relatively high l
 
 Examples of high-level languages include Java, Python, C#, and even C and C++. The latter two provide more freedom and control over memory, making them more low-level but not low enough to be considered a low-level programming language.
 
-A **low-level programming language** is a language that is closer to machine language and contains commands that are more specific to processor instructions.
+A **low-level programming language** is a language that is closer to machine code and contains commands that are more specific to processor instructions.
 
 These languages are machine-friendly and focus on efficient program execution. They deal with registers, memory addresses, call stacks, and other low-level computer components. Low-level languages are more difficult to understand for humans but are easier for machines to interpret. They are often used when performance and efficiency are crucial, such as in real-time applications or embedded systems.
 
 Examples of low-level languages include assembly languages and machine code.
+
+> In modern discussions, "high-level" is relative. Historically, "high-level" meant any language that abstracts the programmer away from raw machine code or assembly. From a computer science or historical perspective, C and C++ sit in a middle ground; they are high-level relative to assembly but low-level relative to most contemporary languages (such as Python, JavaScript, or Rust).
 
 ---
 
