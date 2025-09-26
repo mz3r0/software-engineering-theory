@@ -185,26 +185,15 @@ Gradual typing is a hybrid approach that combines static and dynamic typing with
 
 ### Type systems & type safety
 
-There are multiple [type systems](https://en.wikipedia.org/wiki/Type_system) which determine how the types of data is handled by software. A **type system** is a logical system comprising a set of rules that assigns a property called a type (for example, integer, floating point, string) to every term (a word, phrase, or other set of symbols). Usually the terms are various language constructs of a computer program, such as variables, expressions, functions, or modules.
+A **type system** is a set of formal rules assigning each expression or construct (e.g. variable, function, module) a **type** (such as integer, string, or floating point). Different type systems govern how software handles data types. [Wikipedia](https://en.wikipedia.org/wiki/Type_system)
 
-Even a type can become associated with a type. An implementation of a type system could in theory associate identifications called data type (a type of a value), class (a type of an object), and kind (a type of a type, or metatype). These are the abstractions that typing can go through, on a hierarchy of levels contained in a system.
+Types themselves can form hierarchies: for instance, a _data type_ is the type of a value, a _class_ is the type of an object, and a _kind_ or _metatype_ is a type of types.
 
-Whether automated by the compiler or specified by a programmer (automatic inference vs manual annotation), a type system makes program behavior illegal if outside the type-system rules. Advantages provided by programmer-specified type systems include abstraction and documentation, while advantages provided by compiler-specified type systems include optimization and safety.
+A type system enforces constraints (either via programmer annotations or through compiler inference) and deems operations outside those constraints as illegal.
 
-In computer science, **type safety** and type soundness are the extent to which a programming language discourages or prevents type errors. The behaviors classified as type errors by a given programming language are usually those that result from attempts to perform operations on values that are not of the appropriate data type, e.g., adding a string to an integer when there's no definition on how to handle this case. 
+As written earlier, statically enforced typing (compile time) helps catch errors early, while dynamically enforced typing (run time) associates type information with values and checks them during execution. Many modern systems use a mix of both approaches.
 
-Type enforcement can be static, catching potential errors at compile time, or dynamic, associating type information with values at run-time and consulting them as needed to detect imminent errors. Type enforcement can also be a combination of both.
-
-A C example that is not memory-safe:
-
-```c
-int x = 5;
-char y[] = "37";
-char* z = x + y;
-printf("%c\n", *z);
-```
-
-In this example `z` will point to a memory address five characters beyond `y`, equivalent to three characters after the terminating zero character of the string pointed to by `y`. This is memory that the program is not expected to access. In C terms this is simply undefined behavior and the program may do anything; with a simple compiler it might actually print whatever byte is stored after the string "37".
+In programming languages, **type safety** or **type soundness** refers to how well the language prevents type errors; like attempting to perform an operation on incompatible types (think adding a string to an integer) in cases where the language does not define such behavior.
 
 ### Strong vs weak typing
 
