@@ -154,20 +154,22 @@ Examples of low-level languages include assembly languages and machine code.
 
 Compiled and interpreted programming languages differ in how they are processed and executed by the computer.
 
-In a **compiled language**, the source code is translated directly into machine code that the processor can execute, resulting in faster and more efficient execution. Examples of compiled languages include C, C++, and Fortran.
+In a **compiled language**, the source code is translated into machine code (or bytecode) **before execution**, usually producing a standalone executable. This process tends to make them faster at runtime because the CPU executes pre-compiled instructions directly. Examples include C, C++, Fortran, Rust, and Go.
 
-On the other hand, in an **interpreted language**, the source code is not directly translated into machine code. Instead, an interpreter reads and executes the code line by line, allowing for modifications while the program is running. Examples of interpreted languages include Python, JavaScript, and Ruby.
+On the other hand, in an **interpreted language**, the source code is executed **line by line** at runtime using an interpreter, which reads and executes instructions without producing a separate binary. This makes them slower in general but more flexible for rapid development. Python, Ruby, and JavaScript are common examples.
 
 The key differences between compiled and interpreted programming languages:
 
-| Aspect                  | Compiled Language                                      | Interpreted Language                                      |
-|-------------------------|--------------------------------------------------------|------------------------------------------------------------|
-| Execution               | Directly translated into machine code                  | Read and executed by an interpreter, usually line by line           |
-| Steps to Execution      | Only one step from source code to execution | At least two steps from source code to execution |
-| Speed                   | Compiled programs run faster than interpreted programs  | Interpreted programs can be modified while running and tend to be slower        |
-| Debugging               | Compilation errors prevent the code from compiling     | Debugging occurs at run-time                               |
+| Aspect             | Compiled Language                                  | Interpreted Language                                      |
+| ------------------ | -------------------------------------------------- | --------------------------------------------------------- |
+| Execution          | Directly translated into machine code              | Read and executed by an interpreter, usually line by line |
+| Steps to Execution | Only one step from source code to execution        | At least two steps from source code to execution          |
+| Speed              | Faster                                             | Slower                                                    |
+| Debugging          | Compilation errors prevent the code from compiling | Debugging occurs at run-time                              |
 
-Most programming languages can have both compiled and interpreted implementations, and the distinction between compiled and interpreted languages refers to the typical implementation rather than the language itself.
+The nuance is that many "interpreted" languages today actually sit somewhere in between. For example, Python compiles source code into bytecode (`.pyc` files) which is then interpreted by the Python virtual machine. Java and C# take this a step further: they compile to an intermediate representation (Java bytecode or CIL) and then use a Just-In-Time (JIT) compiler to turn that into machine code at runtime for speed. Even JavaScript engines like V8 in Chrome will interpret code initially but then JIT-compile hot code paths to optimize performance.
+
+The real distinction is more of a spectrum. In ahead-of-time compilation (C, Rust), everything is machine code before running. In pure interpretation (classic BASIC): Code is directly read and executed without pre-compilation. Hybrid approaches (Java, Python, JavaScript) compile to an intermediate form and then interpret or JIT as needed.
 
 ---
 
