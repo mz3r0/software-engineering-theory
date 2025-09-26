@@ -175,9 +175,11 @@ The real distinction is more of a spectrum. In ahead-of-time compilation (C, Rus
 
 ## Dynamically typed vs statically typed
 
-In programming, a **statically typed language** is one where the data type of a variable is known at compile time, and remains unchanged throughout the execution of the program. Type checking occurs at compile time, and the type associated with each variable must be known before the source code is compiled. Examples of statically typed languages include C, C++, and Java.
+In programming, a **statically typed language** is one where the data type of a variable is known and enforced at compile time. Once a variable is assigned a type, it typically cannot change during execution. This allows the compiler to catch many type-related errors before the program runs, often leading to more predictable performance and safer code. Many statically typed languages, such as C, C++, and Java, require explicit type declarations, though some modern statically typed languages like Kotlin, Rust, and TypeScript support type inference, where the compiler can deduce the type from context without requiring the programmer to write it explicitly.
 
-On the other hand, a **dynamically typed language** is one where type checking occurs at runtime or execution time. Variables are checked against types only when the program is executing, and the majority of type checking is performed at run-time. Dynamic typing can be more flexible and easier to use, as developers do not need to specify types explicitly. Examples of dynamically typed languages include Python, JavaScript, Ruby, and PHP.
+A **dynamically typed language**, by contrast, performs type checking at runtime rather than compile time. Variables can hold different types of values over their lifetime, and types are determined only as the program executes. This flexibility often makes dynamic languages quicker to write and more forgiving during early development, though it can allow certain type errors to go unnoticed until runtime. Examples of dynamically typed languages include Python, JavaScript, Ruby, PHP, and Lua. In recent years, optional static type systems have been introduced for many dynamically typed languages; such as Python’s typing module or TypeScript for JavaScript—offering developers the choice to add compile-time checks for improved reliability without fully giving up the flexibility of dynamic typing. The latter hybrid approach is also referred to as gradual typing.
+
+Gradual typing is a hybrid approach that combines static and dynamic typing within the same language. Language examples: TypeScript, Hack (a dialect of PHP), Julia, and Python (through optional type hints).
 
 > In a nutshell: Statically typed refers to type checking at compile time, while dynamically typed refers to type checking at runtime.
 
@@ -189,7 +191,7 @@ Even a type can become associated with a type. An implementation of a type syste
 
 Whether automated by the compiler or specified by a programmer (automatic inference vs manual annotation), a type system makes program behavior illegal if outside the type-system rules. Advantages provided by programmer-specified type systems include abstraction and documentation, while advantages provided by compiler-specified type systems include optimization and safety.
 
-In computer science, **type safety** and type soundness are the extent to which a programming language discourages or prevents type errors. The behaviors classified as type errors by a given programming language are usually those that result from attempts to perform operations on values that are not of the appropriate data type, e.g., adding a string to an integer when there's no definition on how to handle this case. This classification is partly based on opinion.
+In computer science, **type safety** and type soundness are the extent to which a programming language discourages or prevents type errors. The behaviors classified as type errors by a given programming language are usually those that result from attempts to perform operations on values that are not of the appropriate data type, e.g., adding a string to an integer when there's no definition on how to handle this case. 
 
 Type enforcement can be static, catching potential errors at compile time, or dynamic, associating type information with values at run-time and consulting them as needed to detect imminent errors. Type enforcement can also be a combination of both.
 
